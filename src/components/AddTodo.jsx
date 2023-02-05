@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import styles from "./AddTodo.module.css";
 //npm install uuid하고 import해서 사용하고 싶은곳에 id: uuidv4()해서 사용
 //랜덤하게 고유한id값 만들어줌
 export default function AddTodo({ onAdd }) {
@@ -16,14 +17,15 @@ export default function AddTodo({ onAdd }) {
     setText(""); //목록에 add한후에는 input창 초기화
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <input
+        className={styles.input}
         type="text"
         placeholder="Add Todo"
         value={text}
         onChange={handleChange}
       />
-      <button>Add</button>
+      <button className={styles.button}>Add</button>
     </form>
   );
 }

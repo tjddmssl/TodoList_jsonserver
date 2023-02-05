@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddTodo from "./AddTodo";
 import Todo from "./Todo";
-
+import styles from "./TodoList.module.css";
 export default function TodoList({ filter }) {
   const [todos, setTodos] = useState([
     { id: "123", text: "공부하기", status: "active" },
@@ -21,8 +21,8 @@ export default function TodoList({ filter }) {
   const filtered = getFilteredItems(todos, filter);
   //todos중에 우리가 원하는 것만 필터해놓음
   return (
-    <section>
-      <ul>
+    <section className={styles.container}>
+      <ul className={styles.list}>
         {filtered.map((item) => (
           <Todo
             key={item.id}
