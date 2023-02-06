@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import GlobalStyle from "./components/GlobalStyle";
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
 
@@ -9,6 +9,7 @@ function App() {
   //filter=현재 선택된필터
   return (
     <>
+      <GlobalStyle />
       <Header
         filters={filters}
         filter={filter}

@@ -1,7 +1,20 @@
 import React, { useState } from "react";
 import AddTodo from "./AddTodo";
 import Todo from "./Todo";
-import styles from "./TodoList.module.css";
+import styled from "styled-components";
+
+const Container = styled.section`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /*  min-height: 0;입력이 많아져서 스크롤 넘어가도 그대로 형태 유지 즉 overflow 막아줘 */
+`;
+const FilteredList = styled.ul`
+  flex: 1 1 auto;
+  overflow-y: auto;
+`;
+
 export default function TodoList({ filter }) {
   const [todos, setTodos] = useState([
     { id: "123", text: "공부하기", status: "active" },
@@ -21,8 +34,8 @@ export default function TodoList({ filter }) {
   const filtered = getFilteredItems(todos, filter);
   //todos중에 우리가 원하는 것만 필터해놓음
   return (
-    <section className={styles.container}>
-      <ul className={styles.list}>
+    <Container>
+      <FilteredList>
         {filtered.map((item) => (
           <Todo
             key={item.id}
@@ -31,9 +44,9 @@ export default function TodoList({ filter }) {
             onDelete={handleDelete}
           />
         ))}
-      </ul>
+      </FilteredList>
       <AddTodo onAdd={handleAdd} />
-    </section>
+    </Container>
   );
 }
 

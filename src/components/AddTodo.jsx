@@ -1,9 +1,46 @@
 import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import styles from "./AddTodo.module.css";
 //npm install uuid하고 import해서 사용하고 싶은곳에 id: uuidv4()해서 사용
 //랜덤하게 고유한id값 만들어줌
+import styled from "styled-components";
+
+const Form = styled.form`
+  width: 100%;
+  display: flex;
+  padding: 1.4rem 1rem;
+  background-color: transparent;
+  border-top: 2px solid #e6e6fa66;
+`;
+const TodoInput = styled.input`
+  flex: 1 0 auto;
+  font-size: 1.4rem;
+  padding: 0.7rem 1rem;
+  border: 2px solid #e6e6fa66;
+  outline: none;
+  background-color: transparent;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  color: #e6e6fa;
+  ::placeholder {
+    color: #e6e6fa;
+    font-weight: bold;
+  }
+`;
+const AddButton = styled.button`
+  background-color: #e6e6fac3;
+  color: #9a9999ba;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0 2rem;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+
+  :hover {
+    filter: brightness(110%);
+  }
+`;
 export default function AddTodo({ onAdd }) {
   const [text, setText] = useState("");
   const handleChange = (e) => setText(e.target.value);
@@ -17,15 +54,14 @@ export default function AddTodo({ onAdd }) {
     setText(""); //목록에 add한후에는 input창 초기화
   };
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <input
-        className={styles.input}
+    <Form onSubmit={handleSubmit}>
+      <TodoInput
         type="text"
         placeholder="Add Todo"
         value={text}
         onChange={handleChange}
       />
-      <button className={styles.button}>Add</button>
-    </form>
+      <AddButton>Add</AddButton>
+    </Form>
   );
 }
