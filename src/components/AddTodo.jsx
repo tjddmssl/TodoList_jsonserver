@@ -49,7 +49,7 @@ export default function AddTodo({ onAdd }) {
     if (text.trim().length === 0) {
       return;
     }
-    e.preventDefault();
+    e.preventDefault(); //
     onAdd({ id: uuidv4(), text, status: "active" });
     setText(""); //목록에 add한후에는 input창 초기화
   };
