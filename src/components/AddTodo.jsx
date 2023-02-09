@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 //랜덤하게 고유한id값 만들어줌
 import styled from "styled-components";
 
-const Form = styled.form`
+const Form = styled.div`
   width: 100%;
   display: flex;
   padding: 1.4rem 1rem;
@@ -41,27 +41,42 @@ const AddButton = styled.button`
     filter: brightness(110%);
   }
 `;
-export default function AddTodo({ onAdd }) {
+export default function AddTodo({ todos, setTodos }) {
   const [text, setText] = useState("");
+
   const handleChange = (e) => setText(e.target.value);
-  const handleSubmit = (e) => {
-    //String.prototype.trim(): trim() 메서드는 문자열 양 끝의 공백을 제거하고 원본 문자열을 수정하지 않고 새로운 문자열을 반환
+
+  const handleAdd = () => {
+    const newData = {
+      id: uuidv4(),
+      text,
+      status: "active",
+    };
+
     if (text.trim().length === 0) {
       return;
     }
-    e.preventDefault();
-    onAdd({ id: uuidv4(), text, status: "active" });
-    setText(""); //목록에 add한후에는 input창 초기화
+
+    fetch(`http://localhost:3001/todos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newData),
+    }).then((res) => {
+      res.json(newData);
+      setTodos([...todos, newData]);
+    });
   };
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form>
       <TodoInput
         type="text"
         placeholder="Add Todo"
         value={text}
         onChange={handleChange}
       />
-      <AddButton>Add</AddButton>
+      <AddButton onClick={handleAdd}>Add</AddButton>
     </Form>
   );
 }

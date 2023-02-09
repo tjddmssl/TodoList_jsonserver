@@ -29,11 +29,26 @@ const Button = styled.button`
   color: #e6e6fa;
 `;
 
-export default function Todo({ todo, onUpdate, onDelete }) {
-  const { text, status } = todo;
+export default function Todo({ todo, onDelete, onUpdate }) {
+  const { id, text, status } = todo;
   const handleChange = (e) => {
-    onUpdate({ ...todo, status: e.target.checked ? "completed" : "active" });
+    let a = {
+      id: id,
+      text: text,
+      status: e.target.checked ? "completed" : "active",
+    };
+    fetch(`http://localhost:3001/todos/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(a),
+    }).then((res) => {
+      res.json(a);
+      onUpdate({ ...a });
+    });
   };
+
   const handleDelete = () => {
     onDelete(todo);
   };

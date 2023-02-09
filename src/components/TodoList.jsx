@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AddTodo from "./AddTodo";
 import Todo from "./Todo";
 import styled from "styled-components";
@@ -15,37 +15,35 @@ const FilteredList = styled.ul`
   overflow-y: auto;
 `;
 
-export default function TodoList({ filter }) {
-  const [todos, setTodos] = useState([
-    { id: "123", text: "공부하기", status: "active" },
-    { id: "124", text: "청소하기", status: "active" },
-  ]);
-  const handleAdd = (todo) => {
-    //새로운 투두를 todos에 업데이트 해야한다.
-    // console.log(todo);
-    setTodos([...todos, todo]);
-  };
+export default function TodoList({ filter, todos, setTodos }) {
   const handleUpdaate = (updated) => {
     setTodos(todos.map((t) => (t.id === updated.id ? updated : t)));
   };
+
   const handleDelete = (deleted) => {
-    setTodos(todos.filter((t) => t.id !== deleted.id));
+    fetch(`http://localhost:3001/todos/${deleted.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      setTodos(todos.filter((t) => t.id !== deleted.id));
+    });
   };
   const filtered = getFilteredItems(todos, filter);
-  //todos중에 우리가 원하는 것만 필터해놓음
+  //todos중에 내가 원하는 것만 필터해놓음
+
   return (
     <Container>
       <FilteredList>
-        {filtered.map((item) => (
-          <Todo
-            key={item.id}
-            todo={item}
-            onUpdate={handleUpdaate}
-            onDelete={handleDelete}
-          />
-        ))}
+        {filtered &&
+          filtered.map((item) => (
+            <Todo
+              key={item.id}
+              todo={item}
+              onUpdate={handleUpdaate}
+              onDelete={handleDelete}
+            />
+          ))}
       </FilteredList>
-      <AddTodo onAdd={handleAdd} />
+      <AddTodo todos={todos} setTodos={setTodos} />
     </Container>
   );
 }
