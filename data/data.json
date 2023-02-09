@@ -14,6 +14,11 @@
       "id": "d139a14d-7b74-4775-b4e3-e66aed40940a",
       "text": "스터디하기",
       "status": "active"
+    },
+    {
+      "id": "c6ea1c21-1816-4e72-8eeb-b3751b16c3cc",
+      "text": "리엑트하기",
+      "status": "active"
     }
   ]
 }
