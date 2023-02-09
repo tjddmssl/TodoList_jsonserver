@@ -66,6 +66,7 @@ export default function AddTodo({ todos, setTodos }) {
     }).then((res) => {
       res.json(newData);
       setTodos([...todos, newData]);
+      setText("");
     });
   };
   return (
