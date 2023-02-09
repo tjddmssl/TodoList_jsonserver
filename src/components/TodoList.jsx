@@ -29,7 +29,7 @@ export default function TodoList({ filter, todos, setTodos }) {
   };
   const filtered = getFilteredItems(todos, filter);
   //todos중에 내가 원하는 것만 필터해놓음
-
+  //
   return (
     <Container>
       <FilteredList>
