@@ -48,7 +48,8 @@ export default function Todo({ todo, onDelete, onUpdate }) {
       onUpdate({ ...a });
     });
   };
-
+  //onUpdate함수를 여기다가 만들면 안돼..
+  //위에 만들어서 props로 내려야해...
   const handleDelete = () => {
     onDelete(todo);
   };

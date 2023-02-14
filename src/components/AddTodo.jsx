@@ -56,7 +56,7 @@ export default function AddTodo({ todos, setTodos }) {
     if (text.trim().length === 0) {
       return;
     }
-
+    //!POST 할때 setTodos([...todos, newData]);이것처럼 원래 데이터 app.js에서 가져와서 스프레드로 풀고, 새로운 데이터 뒤집어 써야 새로고침안해도 post가 됀다.
     fetch(`http://localhost:3001/todos`, {
       method: "POST",
       headers: {
@@ -66,7 +66,7 @@ export default function AddTodo({ todos, setTodos }) {
     }).then((res) => {
       res.json(newData);
       setTodos([...todos, newData]);
-      setText("");
+      setText(""); //입력완료하고 빈칸으로 만들기
     });
   };
   return (

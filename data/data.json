@@ -8,11 +8,16 @@
     {
       "id": "d0d9fde9-2de5-4533-b8f3-0903d3546cdc",
       "text": "수업듣기",
-      "status": "active"
+      "status": "completed"
     },
     {
       "id": "f718566b-7f08-48d6-ac6a-e6fc89ac531b",
       "text": "리엑트하기",
+      "status": "active"
+    },
+    {
+      "id": "10a4a861-92ee-422c-ad65-cac756a7cadf",
+      "text": "운동하기",
       "status": "active"
     }
   ]
